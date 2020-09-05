@@ -2,6 +2,7 @@ package by.epamtc.pushkevich.java;
 
 import by.epamtc.pushkevich.java.entity.Content;
 import by.epamtc.pushkevich.java.entity.RequestDTO;
+import by.epamtc.pushkevich.java.controller.command.RequestCommandName;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Client {
     public static void main(String[] args) {
         int serverPort = 6666;
+        String Path = "resources/request.txt";
 
         try (Socket socket = new Socket()) {
 
@@ -23,7 +25,7 @@ public class Client {
             ObjectOutput outputStream = new ObjectOutputStream(out);
             ObjectInputStream inputStream = new ObjectInputStream(in);
 
-            outputStream.writeObject(new RequestDTO(new File("resources/request.txt"), "op"));
+            outputStream.writeObject(new RequestDTO(new File(Path), RequestCommandName.GET_WORDS_FROM_INTERROGATIVE_SENTENCES.toString()));
             List<Content> resp = (List<Content>) inputStream.readObject();
 
             writeResponse(resp);
@@ -44,4 +46,3 @@ public class Client {
         }
     }
 }
-

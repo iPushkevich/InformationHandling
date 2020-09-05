@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Word implements Serializable, Content {
     public static final long serialVersionUID = 1L;
-    String word;
+    private String word;
 
     public Word(String word) {
         this.word = word;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Text {
-    List<Sentence> sentences;
+    private List<Sentence> sentences;
 
     public Text(List<Sentence> sentences) {
         this.sentences = sentences;

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Sentence implements Serializable, Content {
     public static final long SerialVersionUID = 1L;
-    String sentence;
+    private String sentence;
 
     public Sentence(String sentence) {
         this.sentence = sentence;

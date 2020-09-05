@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class RequestDTO implements Serializable {
     public static final long serialVersionUID = 1L;
-    File file;
-    String action;
+    private File file;
+    private String action;
 
     public RequestDTO() {
     }

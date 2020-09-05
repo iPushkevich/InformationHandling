@@ -15,4 +15,6 @@ public interface TextFileService {
 
     List<Content> getWordsFromInterrogativeSentence(String textFile);
 
+    List<Content> getReversOrderedSentences(String textFile);
+
 }

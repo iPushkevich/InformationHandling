@@ -44,4 +44,17 @@ public class TextFileServiceImpl implements TextFileService {
 
         return words;
     }
+
+    @Override
+    public List<Content> getReversOrderedSentences(String textFile) {
+        List<Content> sentences = getAllSentences(textFile);
+        List<Content> reversedSentences = new ArrayList<>();
+
+        for (int i = sentences.size() - 1; i >= 0; i--) {
+            reversedSentences.add(sentences.get(i));
+        }
+
+        return reversedSentences;
+    }
+
 }

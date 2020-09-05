@@ -1,12 +1,14 @@
 package by.epamtc.pushkevich.java;
 
-import by.epamtc.pushkevich.java.dao.impl.TextFileDAOImpl;
+import by.epamtc.pushkevich.java.controller.command.Command;
+import by.epamtc.pushkevich.java.controller.command.CommandProvider;
+import by.epamtc.pushkevich.java.entity.Content;
 import by.epamtc.pushkevich.java.entity.RequestDTO;
-import by.epamtc.pushkevich.java.service.TextFileServiceImpl;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class Server {
     public static void main(String[] args) {
@@ -23,15 +25,21 @@ public class Server {
 
             RequestDTO requestDTO = (RequestDTO) inputStream.readObject();
             File requestFile = requestDTO.getFile();
+            String request = requestDTO.getAction();
 
-            String textFile = new TextFileDAOImpl().getText(requestFile);
+            Command command = getCommand(request);
 
-            outputStream.writeObject(new TextFileServiceImpl().getWordsFromInterrogativeSentence(textFile));
+            List<Content> content = command.execute(requestFile);
+            outputStream.writeObject(content);
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-}
 
+    private static Command getCommand(String commandName) {
+        CommandProvider provider = new CommandProvider();
+        return provider.getCommand(commandName);
+    }
+}
